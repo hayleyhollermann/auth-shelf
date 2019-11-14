@@ -1,4 +1,5 @@
 import React from 'react';
+import AddItem from '../AddItem/AddItem';
 import DisplayItems from '../DisplayItems/DisplayItems';
 
 // This is one of our simplest components
@@ -11,6 +12,7 @@ const InfoPage = () => (
     <p>
       Shelf Page
     </p>
+    <AddItem />
     <DisplayItems />
   </div>
 );
