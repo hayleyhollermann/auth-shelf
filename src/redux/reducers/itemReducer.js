@@ -1,4 +1,4 @@
-const itemReducer = (state = {}, action) => {
+const itemReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_ITEMS':
         return action.payload;
@@ -7,7 +7,6 @@ const itemReducer = (state = {}, action) => {
     }
   };
   
-  // user will be on the redux state at:
-  // state.user
+  // items will be on the redux state at:
   export default itemReducer;
   
