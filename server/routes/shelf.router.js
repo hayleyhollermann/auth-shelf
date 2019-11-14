@@ -8,7 +8,14 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * Get all of the items on the shelf
  */
 router.get('/', (req, res) => {
-    res.sendStatus(200); // For testing only, can be removed
+    const queryText = `SELECT * FROM "item";`;
+    pool.query(queryText)
+    .then(result => {
+        res.send(result.rows);
+    })
+    .catch(err => {
+        console.log('error in item GETTER', err);
+    })
 });
 
 
