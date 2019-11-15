@@ -37,7 +37,7 @@ router.delete('/:id', (req, res) => {
     const querySelect = `SELECT "user_id" FROM "item" WHERE "id" = $1;`;
     pool.query(querySelect, [req.params.id])
         .then((response) => {
-            if (response === req.user.id){
+            if (response.rows[0].user_id === req.user.id){
                 const queryText = `DELETE FROM "item" WHERE "id" = $1`
                 pool.query(queryText, [req.params.id])
                 .then(() => {
