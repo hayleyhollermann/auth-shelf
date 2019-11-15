@@ -5,8 +5,6 @@ function* addItemSaga(action) {
     try {
         // passes new item info from the payload to the server
         yield axios.post('/api/shelf', action.payload);
-
-        // automatically log a user in after registration
         yield put({ type: 'FETCH_ITEMS' });
 
     } catch (error) {
@@ -25,11 +23,23 @@ function* fetchItems() {
   } catch (error) {
     console.log('Items get request failed', error);
   }
+} 
+
+function* deleteItem(action) {
+    try {
+        yield axios.delete(`/api/shelf/${action.payload.id}`);
+        yield put({ type: 'FETCH_ITEMS' });
+    }
+    catch (error) {
+        console.log('Error with deleteItemSaga', error);
+        alert('You are not authorized to delete this gizzoat.');
+    }
 }
 
 function* itemSaga() {
-  yield takeLatest('FETCH_ITEMS', fetchItems);
+    yield takeLatest('FETCH_ITEMS', fetchItems);
     yield takeLatest('ADD_ITEM', addItemSaga);
+    yield takeLatest('DELETE_ITEM', deleteItem)
 }
 
 export default itemSaga;

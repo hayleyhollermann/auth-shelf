@@ -17,11 +17,15 @@ class DisplayItems extends Component {
         this.props.dispatch({type:'FETCH_ITEMS'});
     }
 
+    deletePhoto = (item) => {
+        this.props.dispatch({type:'DELETE_ITEM', payload: item});
+    }
+
     render() {
         return (
             <div className="flex-container">
                 {this.props && this.props.item && this.props.item.map(item => 
-                        <Card style={{maxHeight: 500, maxWidth: 300}} key={item.id}>
+                        <Card style={{maxHeight: 700, maxWidth: 300}} key={item.id}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -38,12 +42,9 @@ class DisplayItems extends Component {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
-                                    Share
-        </Button>
-                                <Button size="small" color="primary">
-                                    Learn More
-        </Button>
+                                <Button variant="contained" color="secondary" onClick={() => this.deletePhoto(item)} size="small">
+                                    Delete
+                                </Button>
                             </CardActions>
                         </Card>
                 )}
